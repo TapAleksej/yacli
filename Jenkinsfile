@@ -1,5 +1,5 @@
 pipeline {
-  angens any
+  agents any
 
   parameters {
     choice(name: 'IMAGE', choices: ['ubuntu-2404-lts-oslogin', 'debian-12'])
