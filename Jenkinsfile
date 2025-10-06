@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                        ${yc} config profile create sa-profile || true
+                        ${yc} config profile delete sa-profile || true && ${yc} config profile create sa-profile
                         ${yc} config set folder-id ${env.YC_FOLDER_ID}
                         ${yc} config set cloud-id ${env.YC_CLOUD_ID}
                         ${yc} config set service-account-key ${env.SA_KEY}
