@@ -1,5 +1,5 @@
 def yc = /home/alrex/yandex-cloud/bin/yc
-# '/var/lib/jenkin/yc'
+
 pipeline {
   agent any
 
