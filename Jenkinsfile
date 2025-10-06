@@ -3,10 +3,10 @@ pipeline {
 
   parameters {
     choice(name: 'IMAGE', choices: ['ubuntu-2404-lts-oslogin', 'debian-12'])
-    string(name: 'CPU', dafaultValue: '2')
-    string(name: 'MEM', dafaultValue: '4')
-    string(name: 'DISK_SIZE', dafaultValue: '20')
-    string(name: 'VM_NAME', , dafaultValue: 'test-vm')
+    string(name: 'CPU', defaultValue: '2')
+    string(name: 'MEM', defaultValue: '4')
+    string(name: 'DISK_SIZE', defaultValue: '20')
+    string(name: 'VM_NAME', , defaultValue: 'test-vm')
   }
 
   environment {
