@@ -21,7 +21,8 @@ pipeline {
     stage('Setup profile serv acc') {
       steps {
         script {
-         sh """        
+         sh """   
+            ${yc} config profile delete sa-profile || true
             ${yc} config profile create sa-profile || true
             ${yc} config set folder-id ${env.YC_FOLDER_ID}
             ${yc} config set cloud-id ${env.YC_CLOUD_ID}
