@@ -1,4 +1,4 @@
-def yc = /home/alrex/yandex-cloud/bin/yc
+def yc = '/home/alrex/yandex-cloud/bin/yc'
 
 pipeline {
   agent any
