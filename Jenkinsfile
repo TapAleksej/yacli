@@ -1,3 +1,5 @@
+def yc = /home/alrex/yandex-cloud/bin/yc
+# '/var/lib/jenkin/yc'
 pipeline {
   agent any
 
@@ -19,12 +21,12 @@ pipeline {
     stage('Setup profile serv acc') {
       steps {
         script {
-         sh """
-            yc config profile create sa-profile || true
-            yc config set folder-id ${env.YC_FOLDER_ID}
-            yc config set cloud-id ${env.YC_CLOUD_ID}
-            yc config set service-account-key ${env.SA_KEY}
-            yc config profile activate sa-profile
+         sh """        
+            ${yc} config profile create sa-profile || true
+            ${yc} config set folder-id ${env.YC_FOLDER_ID}
+            ${yc} config set cloud-id ${env.YC_CLOUD_ID}
+            ${yc} config set service-account-key ${env.SA_KEY}
+            ${yc} config profile activate sa-profile
          """
         }
       }
@@ -40,7 +42,7 @@ pipeline {
          def diskSize = params.DISK_SIZE
 
          sh """
-            yc compute instance create \
+            ${yc} compute instance create \
             --name $vmName \
             --zone ru-central1-b \
             --network-interface subnet-name=default-ru-central1-b,nat-ip-version=ipv4 \
@@ -51,7 +53,7 @@ pipeline {
          """
          timeout(time: 5, unit: 'MINUTES') {
            waitUntil {
-             def status = sh(script: "yc compute instance get --name $vmName --format json | jq -r '.status'", returnStdout: true).trim()
+             def status = sh(script: "${yc} compute instance get --name $vmName --format json | jq -r '.status'", returnStdout: true).trim()
              echo "VM status ${status}"
            }
           }
