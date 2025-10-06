@@ -7,7 +7,7 @@ pipeline {
     choice(name: 'IMAGE', choices: ['ubuntu-2404-lts-oslogin', 'debian-12'])
     string(name: 'CPU', defaultValue: '2')
     string(name: 'MEM', defaultValue: '4')
-    string(name: 'DISK_SIZE', defaultValue: '20')
+    //string(name: 'DISK_SIZE', defaultValue: '20')
     string(name: 'VM_NAME', , defaultValue: 'test-vm')
   }
 
@@ -46,7 +46,7 @@ pipeline {
             --name $vmName \
             --zone ru-central1-b \
             --network-interface subnet-name=default-ru-central1-b,nat-ip-version=ipv4 \
-            --create-boot-disk image-folder-id=stadard-images,size=$diskSize,image-family=$image \
+            --create-boot-disk image-folder-id=stadard-images,image-family=$image \
             --memory $mem \
             --cores $cpu \
             --metadata-from-file user-data=metadata.yaml
