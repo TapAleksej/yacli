@@ -1,3 +1,5 @@
+def yc = '/var/lib/jenkins/yc'
+
 pipeline {
     agent any
 
@@ -12,11 +14,11 @@ pipeline {
             steps {
                 script {
                     sh """
-                        yc config profile create sa-profile || true
-                        yc config set folder-id ${env.YC_FOLDER_ID}
-                        yc config set cloud-id ${env.YC_CLOUD_ID}
-                        yc config set service-account-key ${env.SA_KEY}
-                        yc config profile activate sa-profile
+                        ${yc} config profile create sa-profile || true
+                        ${yc} config set folder-id ${env.YC_FOLDER_ID}
+                        ${yc} config set cloud-id ${env.YC_CLOUD_ID}
+                        ${yc} config set service-account-key ${env.SA_KEY}
+                        ${yc} config profile activate sa-profile
                     """
                 }
             }
@@ -25,7 +27,7 @@ pipeline {
         stage('Test YC CLI') {
             steps {
                 script {
-                    sh "yc config list" // Проверка текущей конфигурации
+                    sh "${yc} config list" // Проверка текущей конфигурации
                 }
             }
         }
