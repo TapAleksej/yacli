@@ -2,12 +2,14 @@
 users:
   - name: alrex
     groups: sudo
-    shell: 'ALL=(ALL) NOPASSWD:ALL'
+    shell: /bin/bash
+    sudo: 'ALL=(ALL) NOPASSWD:ALL'
     ssh_authorized_keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAug6IGYFsjYoTN9oJXubGUI+wM7sUIgtjkXPuUlwxSv user@VLG-5CD5491NCN
 users:
   - name: jenkins
     groups: sudo
-    shell: 'ALL=(ALL) NOPASSWD:ALL'
+    shell: /bin/bash
+    sudo: 'ALL=(ALL) NOPASSWD:ALL'
     ssh_authorized_keys:   
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8xNoA4zrPVxEESxfHojxbsDE+ufjzofTlzo5qZMoeK alrex@yandex.ru
