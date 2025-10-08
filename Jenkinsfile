@@ -7,7 +7,7 @@ pipeline {
         choice(name: 'IMAGE', choices: ['ubuntu-2404-lts-oslogin', 'debian-12'])
         string(name: 'CPU', defaultValue: '2')
         string(name: 'MEM', defaultValue: '4')
-        string(name: 'disk_size', defaultValue: '10')
+        string(name: 'disk_size', defaultValue: '10', describe: 'hdd size on gb')
         string(name: 'VM_NAME', defaultValue: 'test-vm')  // Убрал лишнюю запятую
     }
 
