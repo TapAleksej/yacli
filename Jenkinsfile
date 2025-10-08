@@ -1,4 +1,4 @@
-def yc = '/var/lib/jenkins/yc'
+def yc = '/var/lib/jenkins/yandex-cloud/bin/yc'
 def key = '/var/lib/jenkins/key.json'
 
 pipeline {
