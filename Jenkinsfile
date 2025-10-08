@@ -18,7 +18,16 @@ pipeline {
         SA_KEY = credentials('iam') 
     }
 
+    
     stages {
+        stage('tst') {
+            steps {
+                withCredentials([file(credentialsId: 'iam', variable: 'secretFile')]) {
+                     sh 'cat $secretFile'
+                }
+            }    
+        }        
+        
         stage('Setup profile serv acc') {
             steps {               
                 script {                     
