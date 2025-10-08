@@ -1,5 +1,6 @@
 def yc = '/var/lib/jenkins/yandex-cloud/bin/yc'
 def iam_key = '/var/lib/jenkins/secretkey.json'
+def SA_KEY = credentials('iam-key') 
 
 pipeline {
     agent any
@@ -14,24 +15,22 @@ pipeline {
     environment {
         YC_FOLDER_ID = 'b1g967dd97uj20idd9uc'
         YC_CLOUD_ID = 'b1g2u0o136euitr7923q' 
-       // SA_KEY = credentials('iam-key') 
+        //SA_KEY = credentials('iam-key') 
     }
 
     stages {
         stage('Setup profile serv acc') {
-            steps {
-                withCredentials([file(credentialsId: 'iam-key', variable: 'SA_KEY')]) {
-                    script {                    
-                        sh """
-                           set -e                         
-                            ${yc} config profile create sa-profile  || true 
-                            ${yc} config set folder-id ${env.YC_FOLDER_ID}
-                            ${yc} config set cloud-id ${env.YC_CLOUD_ID}                          
-                            ${yc} config set service-account-key ${iam_key}
-                            ${yc} config profile activate sa-profile
-                        """
-                    }
-                }    
+            steps {               
+                script {                    
+                    sh """
+                       set -e                         
+                        ${yc} config profile create sa-profile  || true 
+                        ${yc} config set folder-id ${env.YC_FOLDER_ID}
+                        ${yc} config set cloud-id ${env.YC_CLOUD_ID}                          
+                        ${yc} config set service-account-key ${SA_KEY}
+                        ${yc} config profile activate sa-profile
+                    """
+                }                   
             }
         }
 
