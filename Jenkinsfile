@@ -26,7 +26,8 @@ pipeline {
                        set -e                         
                         ${yc} config profile create sa-profile  || true 
                         ${yc} config set folder-id ${env.YC_FOLDER_ID}
-                        ${yc} config set cloud-id ${env.YC_CLOUD_ID}                          
+                        ${yc} config set cloud-id ${env.YC_CLOUD_ID}     
+                        println '${env.JSON_FILE}'
                         ${yc} config set service-account-key ${env.JSON_FILE}
                         ${yc} config profile activate sa-profile
                     """
