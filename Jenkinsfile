@@ -49,14 +49,14 @@ pipeline {
                     def cpu = params.CPU
                     def mem = params.MEM
                     def zone = 'ru-central1-b'
-                    def hdd='20'
+                    def hddSize='15'
 
                     sh """
                         ${yc} compute instance create \\
                             --name $vmName \\
                             --zone $zone \\
                             --network-interface subnet-name=default-$zone,nat-ip-version=ipv4 \\
-                            --create-boot-disk image-folder-id=standard-images,image-family=$image,size=$hdd \\
+                            --create-boot-disk image-folder-id=standard-images,image-family=$image,size=$hddSize \\
                             --memory $mem \\
                             --cores $cpu \\
                             --metadata-from-file user-data=metadata.yaml
