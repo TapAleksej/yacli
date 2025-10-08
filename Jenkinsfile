@@ -60,7 +60,7 @@ pipeline {
                             --create-boot-disk image-folder-id=standard-images,image-family=$image \\
                             --memory $mem \\
                             --cores $cpu \\
-                            --size $disk_size
+                            --size $disk_size \\
                             --metadata-from-file user-data=metadata.yaml
                     """
 
