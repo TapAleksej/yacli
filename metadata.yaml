@@ -4,7 +4,7 @@ users:
     groups: sudo
     shell: 'ALL=(ALL) NOPASSWD:ALL'
     ssh_authorized_keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE7x2PK3XZu57vVkuAgrJmMRwIVZ9lzHie7cSQsup+1T alrex@yandex.ru
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAug6IGYFsjYoTN9oJXubGUI+wM7sUIgtjkXPuUlwxSv user@VLG-5CD5491NCN
 users:
   - name: jenkins
     groups: sudo
