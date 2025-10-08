@@ -18,15 +18,7 @@ pipeline {
     }
 
     
-    stages {
-        stage('Proverka credow') {
-            steps {
-                withCredentials([file(credentialsId: 'iam', variable: 'secretFile')]) {
-                     sh 'cat $secretFile'
-                }
-            }    
-        }        
-        
+    stages {             
         stage('Setup profile serv acc') {
             steps {               
                 script {                     
