@@ -5,9 +5,8 @@ pipeline {
 
     parameters {
         choice(name: 'IMAGE', choices: ['ubuntu-2404-lts-oslogin', 'debian-12'])
-        string(name: 'DISK_SIZE', defaultValue: '10', description: 'hdd size on gb')
         string(name: 'CPU', defaultValue: '2')
-        string(name: 'MEM', defaultValue: '4')        
+        string(name: 'MEM', defaultValue: '4')
         string(name: 'VM_NAME', defaultValue: 'test-vm')  // Убрал лишнюю запятую
     }
 
@@ -19,6 +18,14 @@ pipeline {
 
     
     stages {
+        stage('Proverka credow') {
+            steps {
+                withCredentials([file(credentialsId: 'iam', variable: 'secretFile')]) {
+                     sh 'cat $secretFile'
+                }
+            }    
+        }        
+        
         stage('Setup profile serv acc') {
             steps {               
                 script {                     
@@ -39,9 +46,8 @@ pipeline {
                 script {
                     def vmName = params.VM_NAME
                     def image = params.IMAGE
-                    def disk_size = params.DISK_SIZE
                     def cpu = params.CPU
-                    def mem = params.MEM                   
+                    def mem = params.MEM
                     def zone = 'ru-central1-b'
 
                     sh """
@@ -51,7 +57,7 @@ pipeline {
                             --network-interface subnet-name=default-$zone,nat-ip-version=ipv4 \\
                             --create-boot-disk image-folder-id=standard-images,image-family=$image \\
                             --memory $mem \\
-                            --cores $cpu \\                            
+                            --cores $cpu \\
                             --metadata-from-file user-data=metadata.yaml
                     """
 
