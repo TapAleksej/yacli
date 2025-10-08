@@ -57,10 +57,9 @@ pipeline {
                             --name $vmName \\
                             --zone $zone \\
                             --network-interface subnet-name=default-$zone,nat-ip-version=ipv4 \\
-                            --create-boot-disk image-folder-id=standard-images,image-family=$image \\
+                            --create-boot-disk image-folder-id=standard-images,image-family=$image,size $disk_size \\
                             --memory $mem \\
-                            --cores $cpu \\
-                            --size $disk_size \\
+                            --cores $cpu \\                            
                             --metadata-from-file user-data=metadata.yaml
                     """
 
