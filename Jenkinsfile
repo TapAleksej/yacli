@@ -47,9 +47,9 @@ pipeline {
                     sh """
                         ${yc} compute instance create \\
                             --name $vmName \\
-                            --zone ru-central1-b \\
-                            --network-interface subnet-name=default-ru-central1-b,nat-ip-version=ipv4 \\
-                            --create-boot-disk image-folder-id=standard-images,image-family=$image,size=$disk_size \\
+                            --zone $zone \\
+                            --network-interface subnet-name=default-$zone,nat-ip-version=ipv4 \\
+                            --create-boot-disk image-folder-id=standard-images,image-family=$image \\
                             --memory $mem \\
                             --cores $cpu \\                            
                             --metadata-from-file user-data=metadata.yaml
