@@ -22,12 +22,13 @@ pipeline {
             steps {
                 script {
                     sh """
+                       set -e
                         ${yc} config profile delete sa-profile || true 
                         ${yc} config profile create sa-profile  || true 
                         ${yc} config set folder-id ${env.YC_FOLDER_ID}
                         ${yc} config set cloud-id ${env.YC_CLOUD_ID}  
-                        echo '${env.SA_KEY}' > service-account-key.json
-                        ${yc} config set service-account-key service-account-key.json
+                        echo '${env.SA_KEY}'
+                        ${yc} config set service-account-key ${env.SA_KEY}
                         ${yc} config profile activate sa-profile
                     """
                 }
