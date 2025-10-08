@@ -14,24 +14,24 @@ pipeline {
     environment {
         YC_FOLDER_ID = 'b1g967dd97uj20idd9uc'
         YC_CLOUD_ID = 'b1g2u0o136euitr7923q' 
-        SA_KEY = credentials('iam-key') 
+       // SA_KEY = credentials('iam-key') 
     }
 
     stages {
         stage('Setup profile serv acc') {
             steps {
-                script {
-                    sh """
-                       set -e
-                        ${yc} config profile delete sa-profile || true 
-                        ${yc} config profile create sa-profile  || true 
-                        ${yc} config set folder-id ${env.YC_FOLDER_ID}
-                        ${yc} config set cloud-id ${env.YC_CLOUD_ID}  
-                        echo '${env.SA_KEY}'
-                        ${yc} config set service-account-key ${env.SA_KEY}
-                        ${yc} config profile activate sa-profile
-                    """
-                }
+                withCredentials([file(credentialsId: 'iam-key', variable: 'SA_KEY')]) {
+                    script {                    
+                        sh """
+                           set -e                         
+                            ${yc} config profile create sa-profile  || true 
+                            ${yc} config set folder-id ${env.YC_FOLDER_ID}
+                            ${yc} config set cloud-id ${env.YC_CLOUD_ID}                          
+                            ${yc} config set service-account-key <(cat $SA_KEY}
+                            ${yc} config profile activate sa-profile
+                        """
+                    }
+                }    
             }
         }
 
