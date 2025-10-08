@@ -27,7 +27,7 @@ pipeline {
                             ${yc} config profile create sa-profile  || true 
                             ${yc} config set folder-id ${env.YC_FOLDER_ID}
                             ${yc} config set cloud-id ${env.YC_CLOUD_ID}                          
-                            ${yc} config set service-account-key <(cat $SA_KEY)
+                            ${yc} config set service-account-key ${iam_key}
                             ${yc} config profile activate sa-profile
                         """
                     }
