@@ -5,10 +5,10 @@ pipeline {
 
     parameters {
         choice(name: 'IMAGE', choices: ['ubuntu-2404-lts-oslogin', 'debian-12'])
-        string(name: 'HDD_SIZE', defaultValue: '15')
+        string(name: 'HDD_SIZE', defaultValue: '15', description: 'hdd size')
         string(name: 'CPU', defaultValue: '2')
         string(name: 'MEM', defaultValue: '4')
-        string(name: 'VM_NAME', defaultValue: 'test-vm')  // Убрал лишнюю запятую
+        string(name: 'VM_NAME', defaultValue: 'test-vm') 
     }
 
     environment {
