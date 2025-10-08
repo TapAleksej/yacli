@@ -1,6 +1,4 @@
 def yc = '/var/lib/jenkins/yandex-cloud/bin/yc'
-def iam_key = '/var/lib/jenkins/secretkey.json'
-
 
 pipeline {
     agent any
