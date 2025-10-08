@@ -7,6 +7,7 @@ pipeline {
         choice(name: 'IMAGE', choices: ['ubuntu-2404-lts-oslogin', 'debian-12'])
         string(name: 'CPU', defaultValue: '2')
         string(name: 'MEM', defaultValue: '4')
+        string(name: 'disk_size', defaultValue: '10')
         string(name: 'VM_NAME', defaultValue: 'test-vm')  // Убрал лишнюю запятую
     }
 
@@ -48,6 +49,7 @@ pipeline {
                     def image = params.IMAGE
                     def cpu = params.CPU
                     def mem = params.MEM
+                    def disk_size = params.disk_size
                     def zone = 'ru-central1-b'
 
                     sh """
@@ -58,6 +60,7 @@ pipeline {
                             --create-boot-disk image-folder-id=standard-images,image-family=$image \\
                             --memory $mem \\
                             --cores $cpu \\
+                            --size $disk_size
                             --metadata-from-file user-data=metadata.yaml
                     """
 
