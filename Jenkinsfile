@@ -15,7 +15,7 @@ pipeline {
     environment {
         YC_FOLDER_ID = 'b1g967dd97uj20idd9uc'
         YC_CLOUD_ID = 'b1g2u0o136euitr7923q' 
-        SA_KEY = credentials('iam') 
+        JSON_FILE = credentials('iam') 
     }
 
     stages {
@@ -27,7 +27,7 @@ pipeline {
                         ${yc} config profile create sa-profile  || true 
                         ${yc} config set folder-id ${env.YC_FOLDER_ID}
                         ${yc} config set cloud-id ${env.YC_CLOUD_ID}                          
-                        ${yc} config set service-account-key ${env.SA_KEY}
+                        ${yc} config set service-account-key ${env.JSON_FILE}
                         ${yc} config profile activate sa-profile
                     """
                 }                   
