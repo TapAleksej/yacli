@@ -14,7 +14,7 @@ pipeline {
     environment {
         YC_FOLDER_ID = 'b1g967dd97uj20idd9uc'
         YC_CLOUD_ID = 'b1g2u0o136euitr7923q' 
-        SA_KEY = credentials('iam-key')  // Проверьте, что это переменная окружения или файл
+        SA_KEY = credentials('iam-key') 
     }
 
     stages {
